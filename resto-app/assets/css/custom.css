@@ -1,0 +1,112 @@
+.demo-my-bg{
+	background-image : url("assets/img/balloon.jpg");
+}
+input#srch-term.form-control{
+	height: 50px;
+	font-size: 15px;
+}
+
+.tran_container{
+	background-color: #e7ebee;
+}
+#container .table td{
+	border-top: 1px solid #e7ebee;
+}
+#container .table th{
+	border-bottom: 2px solid #e7ebee;
+}
+#btn_search{
+	height: 50px;
+    width: 60px;
+}
+table.table.table-bordered{
+	border: 1px solid #e7ebee;
+}
+td#cart.text-center{
+	border: 1px solid #e7ebee;
+}
+th#cart.text-center{
+	border: 1px solid #e7ebee;
+}
+
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-menu {  
+
+  /* used to be tt-dropdown-menu in older versions */
+  width: 500px;
+  font-size: 18px;
+  margin-top: 4px;
+  padding: 4px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor,.tt-suggestion:hover {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+div.panel-body.tran_container{
+      height: 250px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+}
+/*quantity, action*/
+#cashier-table td:nth-child(3),
+#cashier-table td:nth-child(7)
+{
+    text-align : center;
+    font-weight: bold;
+}
+/*price*/
+#cashier-table td:nth-child(4)
+{
+    text-align : right;
+}
+/*discount*/
+#cashier-table td:nth-child(5) 
+{
+    text-align : center;
+    font-style: italic;
+}
+/*extended*/
+#cashier-table td:nth-child(6)
+{
+    text-align : right;
+    font-weight: bold;
+}
+#div-itemlist{
+  height: 200px;
+}
+
+@media screen and (min-width: 992px) {
+  input#srch-term.typeahead.form-control.tt-input{
+    width: 260px;
+  }
+}
