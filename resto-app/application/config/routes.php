@@ -49,6 +49,26 @@ $route['delete-item/(:num)'] = 'Items/Items_controller/ajax_delete/$1';
 $route['showlist-items-api'] = 'Items/Items_controller/ajax_api_list';
 
 
+//************************************ SUPPLIERS ROUTES ****************************************************************
+//******************************************************************************************************************
+
+$route['suppliers-page'] = 'Suppliers/Suppliers_controller';
+
+$route['showlist-suppliers'] = 'Suppliers/Suppliers_controller/ajax_list';
+
+$route['add-supplier'] = 'Suppliers/Suppliers_controller/ajax_add';
+
+$route['edit-supplier/(:num)'] = 'Suppliers/Suppliers_controller/ajax_edit/$1';
+
+$route['update-supplier'] = 'Suppliers/Suppliers_controller/ajax_update';
+
+$route['delete-supplier/(:num)'] = 'Suppliers/Suppliers_controller/ajax_delete/$1';
+
+//======================================== API SECTION =================================================================
+
+$route['showlist-items-api'] = 'Items/Items_controller/ajax_api_list';
+
+
 //************************************ PRODUCTS ROUTES ****************************************************************
 //******************************************************************************************************************
 

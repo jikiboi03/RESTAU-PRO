@@ -111,21 +111,37 @@
                                         <?php if($this->uri->segment(1) == 'items-page'){ ?>
 
                                             <li class="active-link">
-                                                <a href="<?php echo base_url();?>items-page">
+                                                <a href="#">
                                                     <i class="fa fa-archive"></i>
-                                                    <strong><span class="menu-title">Items</span></strong>
+                                                    <strong><span class="menu-title">Inventory</span></strong>
                                                     <span class="label label-default pull-right">admin</span>
                                                 </a>
+
+                                                <!--Submenu-->
+                                                <ul class="collapse">
+                                                    <li><a href="<?php echo base_url();?>items-page">Items</a>
+                                                    </li>                                            
+                                                    <li><a href="<?php echo base_url();?>suppliers-page">Suppliers</a>
+                                                    </li>
+                                                </ul>
                                             </li>
 
                                         <?php }else{ ?>
 
                                             <li>
-                                                <a href="<?php echo base_url();?>items-page">
+                                                <a href="#">
                                                     <i class="fa fa-archive"></i>
-                                                    <span class="menu-title">Items</span>
+                                                    <strong><span class="menu-title">Inventory</span></strong>
                                                     <span class="label label-default pull-right">admin</span>
                                                 </a>
+
+                                                <!--Submenu-->
+                                                <ul class="collapse">
+                                                    <li><a href="<?php echo base_url();?>items-page">Items</a>
+                                                    </li>                                            
+                                                    <li><a href="<?php echo base_url();?>suppliers-page">Suppliers</a>
+                                                    </li>
+                                                </ul>
                                             </li>
 
                                         <?php } ?>

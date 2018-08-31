@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
+-- version 4.5.4.1deb2ubuntu2.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 30, 2018 at 06:00 PM
+-- Generation Time: Aug 31, 2018 at 06:03 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -79,17 +79,19 @@ CREATE TABLE `items` (
   `descr` varchar(200) NOT NULL,
   `type` varchar(20) NOT NULL,
   `encoded` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `removed` int(1) NOT NULL
+  `removed` int(1) NOT NULL,
+  `stock_in` int(11) NOT NULL,
+  `stock_out` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `name`, `descr`, `type`, `encoded`, `removed`) VALUES
-(1, 'Coke in Can', 'Coca Cola Softdrink', 'NON-PERISHABLE', '2018-08-22 10:11:29', 0),
-(2, 'Chicken Cut', 'Chicken meat cut', 'PERISHABLE', '2018-08-22 10:12:50', 0),
-(3, 'Cup of Rice', 'Tonner rice', 'PERISHABLE', '2018-08-22 10:16:55', 0);
+INSERT INTO `items` (`item_id`, `name`, `descr`, `type`, `encoded`, `removed`, `stock_in`, `stock_out`) VALUES
+(1, 'Coke in Can', 'Coca Cola Softdrink', 'NON-PERISHABLE', '2018-08-22 10:11:29', 0, 0, 0),
+(2, 'Chicken Cut', 'Chicken meat cut', 'PERISHABLE', '2018-08-22 10:12:50', 0, 0, 0),
+(3, 'Cup of Rice', 'Tonner rice', 'PERISHABLE', '2018-08-22 10:16:55', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -179,7 +181,10 @@ INSERT INTO `logs` (`log_id`, `user_fullname`, `log_type`, `details`, `date_time
 (67, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-28 17:56:42'),
 (68, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-29 09:35:35'),
 (69, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-30 09:10:07'),
-(70, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-30 12:48:03');
+(70, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-30 12:48:03'),
+(71, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-31 09:01:37'),
+(72, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-31 14:51:48'),
+(73, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-31 17:42:00');
 
 -- --------------------------------------------------------
 
@@ -407,7 +412,9 @@ CREATE TABLE `suppliers` (
   `address` varchar(200) NOT NULL,
   `city` varchar(45) NOT NULL,
   `contact` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL
+  `email` varchar(45) NOT NULL,
+  `encoded` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `removed` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -817,7 +824,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `packages`
 --

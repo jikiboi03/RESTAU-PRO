@@ -38,6 +38,39 @@ $(document).ready(function()
                 "scrollX": true
             });
     }
+    else if(tableID == "suppliers-table")
+    {
+    //datatables
+            table = $('#suppliers-table').DataTable({ 
+         
+                "processing": true, //Feature control the processing indicator.
+                "serverSide": true, //Feature control DataTables' server-side processing mode.
+                "order": [], //Initial no order.
+         
+                // Load data for the table's content from an Ajax source
+                "ajax": {
+                    "url": "showlist-suppliers",
+                    "type": "POST",
+                },
+         
+                //Set column definition initialisation properties.
+                "columnDefs": [
+                { 
+                    "targets": [ -1 ], //last column
+                    "orderable": false, //set not orderable
+                },
+                {
+                      "targets": 3,
+                      "className": "text-center",
+                },
+                {
+                      "targets": 4,
+                      "className": "text-right",
+                },
+                ],
+                "scrollX": true
+            });
+    }
     else if(tableID == "sold-today-table")
     {
     //datatables
@@ -1893,6 +1926,18 @@ function add_item() // ---> calling for the Add Modal form
     $('.modal-title').text(text); // Set Title to Bootstrap modal title
 }
 
+function add_supplier() // ---> calling for the Add Modal form
+{
+    save_method = 'add-supplier';
+    text = 'Add Supplier';
+    
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+    $('#modal_form').modal('show'); // show bootstrap modal
+    $('.modal-title').text(text); // Set Title to Bootstrap modal title
+}
+
 function add_product() // ---> calling for the Add Modal form
 {
     save_method = 'add-product';
@@ -2153,6 +2198,40 @@ function edit_item(id)
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Item'); // Set title to Bootstrap modal title
+ 
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+}
+
+function edit_supplier(id)
+{
+    save_method = 'update-supplier';
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+ 
+    //Ajax Load data from ajax
+    $.ajax({
+        url : "edit-supplier/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+            $('[name="supplier_id"]').val(data.supplier_id);
+            $('[name="name"]').val(data.name);
+            $('[name="address"]').val(data.address);
+            $('[name="city"]').val(data.city);
+            $('[name="contact"]').val(data.contact);
+            $('[name="email"]').val(data.email);
+            
+            $('[name="current_name"]').val(data.name);
+
+            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Edit Supplier'); // Set title to Bootstrap modal title
  
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -2762,6 +2841,14 @@ function save()
     {
         url = "update-item";
     }
+    else if(save_method == 'add-supplier') 
+    {
+        url = "add-supplier";
+    }
+    else if(save_method == 'update-supplier') 
+    {
+        url = "update-supplier";
+    }
     else if(save_method == 'add-product') 
     {
         url = "add-product";
@@ -2966,6 +3053,23 @@ function save()
                     log_type = 'Update';
 
                     details = 'Item updated I' + $('[name="item_id"]').val() 
+                    + ': ' + $('[name="current_name"]').val() + ' to ' + $('[name="name"]').val();
+
+                    set_system_log(log_type, details);
+                }
+                else if(save_method == 'add-supplier') 
+                {
+                    log_type = 'Add';
+
+                    details = 'New supplier added: ' + $('[name="name"]').val();
+
+                    set_system_log(log_type, details);
+                }
+                else if(save_method == 'update-supplier') 
+                {
+                    log_type = 'Update';
+
+                    details = 'Supplier updated SU' + $('[name="supplier_id"]').val() 
                     + ': ' + $('[name="current_name"]').val() + ' to ' + $('[name="name"]').val();
 
                     set_system_log(log_type, details);
@@ -3422,6 +3526,35 @@ function delete_item(id, name)
                 var log_type = 'Delete';
 
                 var details = 'Item deleted I' + id; 
+
+                set_system_log(log_type, details);
+
+                //if success reload ajax table
+                $('#modal_form').modal('hide');
+                reload_table();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error deleting data');
+            }
+        });
+ 
+    }
+}
+function delete_supplier(id, name)
+{
+    if(confirm('Are you sure to delete this data?'))
+    {
+        // ajax delete data to database
+        $.ajax({
+            url : "delete-supplier/"+id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data)
+            {
+                var log_type = 'Delete';
+
+                var details = 'Supplier deleted SU' + id; 
 
                 set_system_log(log_type, details);
 
