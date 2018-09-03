@@ -24,7 +24,7 @@
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <ol class="breadcrumb">
                     <li><a href="<?php echo base_url('dashboard');?>">Dashboard</a></li>
-                    <li class="active">Suppliers List</li>
+                    <li class="active">Units List</li>
                 </ol>
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <!--End breadcrumb-->
@@ -35,23 +35,22 @@
                     <!--===================================================-->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Suppliers Information Table</h3>
+                            <h3 class="panel-title">Units Information Table</h3>
                         </div>
                         <div class="panel-body">
-                            <button class="btn btn-success" onclick="add_supplier()"><i class="fa fa-plus-square"></i> &nbsp;Add New Supplier</button>
+                            <button class="btn btn-success" onclick="add_unit()"><i class="fa fa-plus-square"></i> &nbsp;Add New Unit</button>
                             <button class="btn btn-default" onclick="reload_table()"><i class="fa fa-refresh"></i> &nbsp;Reload</button>
                             <br><br>
-                            <table id="suppliers-table" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-size: 14px;">
+                            <table id="units-table" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-size: 14px;">
                                 <thead>
                                     <tr>
-                                        <th style="width:60px;">SuppID</th>
+                                        <th style="width:60px;">Unit ID</th>
                                         <th>Name</th>
-                                        <th>Address</th>
-                                        <th>City</th>
-                                        <th>Contact</th>
-                                        <th>Email</th>
-                                        <th style="width:60px;">Action</th>
+                                        <th>Description</th>
+                                        <th>Equiv.inPcs</th>
+                                        
                                         <th class="min-desktop">Encoded</th>
+                                        <th style="width:60px;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,12 +74,12 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h3 class="modal-title">Supplier Form</h3>
+                            <h3 class="modal-title">Unit Form</h3>
                         </div>
                         <div class="modal-body form">
                             <form action="#" id="form" class="form-horizontal">
 
-                                <input type="hidden" value="" name="supplier_id"/>
+                                <input type="hidden" value="" name="unit_id"/>
                                 <input type="hidden" value="" name="current_name"/>
                                 
                                 <div class="form-body">
@@ -88,39 +87,23 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Name :</label>
                                         <div class="col-md-9">
-                                            <input name="name" placeholder="Supplier Name" class="form-control" type="text">
+                                            <input name="name" placeholder="Unit Name" class="form-control" type="text">
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label col-md-3">Address :</label>
+                                        <label class="control-label col-md-3">Description :</label>
                                         <div class="col-md-9">
-                                            <textarea name="address" placeholder="Supplier Address" class="form-control"></textarea>
+                                            <textarea name="descr" placeholder="Unit Desctription" class="form-control"></textarea>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label col-md-3">City :</label>
+                                        <label class="control-label col-md-3">Equivalent in Pcs :</label>
                                         <div class="col-md-9">
-                                            <textarea name="city" placeholder="Supplier City" class="form-control"></textarea>
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Contact :</label>
-                                        <div class="col-md-9">
-                                            <textarea name="contact" placeholder="Supplier Contact" class="form-control"></textarea>
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Email :</label>
-                                        <div class="col-md-9">
-                                            <textarea name="email" placeholder="Supplier Email" class="form-control"></textarea>
+                                            <input name="pcs" placeholder="Equivalent quantity in Pieces" class="form-control" type="number">
                                             <span class="help-block"></span>
                                         </div>
                                     </div>

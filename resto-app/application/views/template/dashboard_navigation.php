@@ -108,7 +108,7 @@
                                     
                                     <?php if($this->session->userdata('administrator') == '1'): ?>
 
-                                        <?php if($this->uri->segment(1) == 'items-page'){ ?>
+                                        <?php if($this->uri->segment(1) == 'items-page' || $this->uri->segment(1) == 'suppliers-page' || $this->uri->segment(1) == 'units-page'){ ?>
 
                                             <li class="active-link">
                                                 <a href="#">
@@ -122,6 +122,8 @@
                                                     <li><a href="<?php echo base_url();?>items-page">Items</a>
                                                     </li>                                            
                                                     <li><a href="<?php echo base_url();?>suppliers-page">Suppliers</a>
+                                                    </li>
+                                                    <li><a href="<?php echo base_url();?>units-page">Units</a>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -141,6 +143,7 @@
                                                     </li>                                            
                                                     <li><a href="<?php echo base_url();?>suppliers-page">Suppliers</a>
                                                     </li>
+                                                    <li><a href="<?php echo base_url();?>units-page">Units</a>
                                                 </ul>
                                             </li>
 

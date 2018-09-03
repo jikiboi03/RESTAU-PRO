@@ -48,8 +48,11 @@
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Type</th>
-                                        <th class="min-desktop">Encoded</th>
+                                        <th>Stock(pcs)</th>
+                                        <th>S.In</th>
+                                        <th>S.Out</th>
                                         <th style="width:60px;">Action</th>
+                                        <th class="min-desktop">Encoded</th>
                                     </tr>
                                 </thead>
                                 <tbody>

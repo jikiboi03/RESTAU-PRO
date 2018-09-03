@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 31, 2018 at 06:03 PM
+-- Generation Time: Sep 03, 2018 at 05:54 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -184,7 +184,11 @@ INSERT INTO `logs` (`log_id`, `user_fullname`, `log_type`, `details`, `date_time
 (70, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-30 12:48:03'),
 (71, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-31 09:01:37'),
 (72, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-31 14:51:48'),
-(73, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-31 17:42:00');
+(73, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-08-31 17:42:00'),
+(74, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-03 09:21:19'),
+(75, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-03 11:39:48'),
+(76, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-03 16:50:42'),
+(77, 'admin', 'Add', 'New%20unit%20added:%20Dozen12pcs', '2018-09-03 17:03:30');
 
 -- --------------------------------------------------------
 
@@ -619,6 +623,28 @@ INSERT INTO `trans_logs` (`log_id`, `user_fullname`, `log_type`, `details`, `dat
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `units`
+--
+
+CREATE TABLE `units` (
+  `unit_id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `descr` varchar(100) NOT NULL,
+  `pcs` int(11) NOT NULL,
+  `encoded` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `removed` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`unit_id`, `name`, `descr`, `pcs`, `encoded`, `removed`) VALUES
+(1, 'Dozen(12pcs)', 'Used in Eggs', 12, '2018-09-03 17:03:30', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -790,6 +816,12 @@ ALTER TABLE `trans_logs`
   ADD PRIMARY KEY (`log_id`);
 
 --
+-- Indexes for table `units`
+--
+ALTER TABLE `units`
+  ADD PRIMARY KEY (`unit_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -824,7 +856,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT for table `packages`
 --
@@ -890,6 +922,11 @@ ALTER TABLE `transactions`
 --
 ALTER TABLE `trans_logs`
   MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT for table `units`
+--
+ALTER TABLE `units`
+  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `users`
 --

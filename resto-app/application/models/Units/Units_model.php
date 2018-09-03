@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
  
-class Suppliers_model extends CI_Model {
+class Units_model extends CI_Model {
  
-    var $table = 'suppliers';
+    var $table = 'units';
 
-    var $column_order = array('supplier_id','name','address','city','contact','email',null,'encoded'); //set column field database for datatable orderable
-    var $column_search = array('supplier_id','name','address','city','contact','email','encoded'); //set column field database for datatable searchable
+    var $column_order = array('unit_id','name','descr','pcs','encoded',null); //set column field database for datatable orderable
+    var $column_search = array('unit_id','name','descr','pcs','encoded'); //set column field database for datatable searchable
 
-    var $order = array('supplier_id' => 'desc'); // default order 
+    var $order = array('unit_id' => 'desc'); // default order 
  
     public function __construct()
     {
@@ -18,7 +18,6 @@ class Suppliers_model extends CI_Model {
  
     private function _get_datatables_query()
     {
-         
         $this->db->from($this->table);
  
         $i = 0;
@@ -90,7 +89,7 @@ class Suppliers_model extends CI_Model {
     }
 
     // get both id and names
-    function get_suppliers()
+    function get_items()
     {
         $this->db->from($this->table);
 
@@ -103,9 +102,9 @@ class Suppliers_model extends CI_Model {
         return $query->result();
     }
 
-    function get_supplier_id($name)
+    function get_item_id($name)
     {
-        $this->db->select('supplier_id');
+        $this->db->select('item_id');
         $this->db->from($this->table);
         $this->db->where('name',$name);
 
@@ -113,14 +112,14 @@ class Suppliers_model extends CI_Model {
 
         $row = $query->row();
 
-        return $row->supplier_id;
+        return $row->item_id;
     }
 
-    function get_item_name($supplier_id)
+    function get_item_name($item_id)
     {
         $this->db->select('name');
         $this->db->from($this->table);
-        $this->db->where('supplier_id',$supplier_id);
+        $this->db->where('item_id',$item_id);
         
         $query = $this->db->get();
 
@@ -129,43 +128,17 @@ class Suppliers_model extends CI_Model {
         return $row->name;
     }
 
-    function get_item_address($supplier_id)
+    function get_item_descr($item_id)
     {
-        $this->db->select('address');
+        $this->db->select('descr');
         $this->db->from($this->table);
-        $this->db->where('supplier_id',$supplier_id);
+        $this->db->where('item_id',$item_id);
         
         $query = $this->db->get();
 
         $row = $query->row();
 
-        return $row->address;
-    }
-
-    function get_item_city($supplier_id)
-    {
-        $this->db->select('city');
-        $this->db->from($this->table);
-        $this->db->where('supplier_id',$supplier_id);
-        
-        $query = $this->db->get();
-
-        $row = $query->row();
-
-        return $row->city;
-    }
-
-    function get_item_contact($supplier_id)
-    {
-        $this->db->select('contact');
-        $this->db->from($this->table);
-        $this->db->where('supplier_id',$supplier_id);
-        
-        $query = $this->db->get();
-
-        $row = $query->row();
-
-        return $row->contact;
+        return $row->descr;
     }
  
     function count_filtered()
@@ -187,10 +160,10 @@ class Suppliers_model extends CI_Model {
         return $this->db->count_all_results();
     }
  
-    public function get_by_id($supplier_id)
+    public function get_by_id($item_id)
     {
         $this->db->from($this->table);
-        $this->db->where('supplier_id',$supplier_id);
+        $this->db->where('item_id',$item_id);
         $query = $this->db->get();
  
         return $query->row();

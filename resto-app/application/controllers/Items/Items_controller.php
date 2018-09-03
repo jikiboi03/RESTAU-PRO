@@ -40,12 +40,16 @@ class Items_controller extends CI_Controller {
             
             $row[] = $items->type;
 
-            $row[] = $items->encoded;
+            $row[] = $items->stock;
+            $row[] = $items->stock_in;
+            $row[] = $items->stock_out;
 
             //add html for action
             $row[] = '<a class="btn btn-info" href="javascript:void(0)" title="Edit" onclick="edit_item('."'".$items->item_id."'".')"><i class="fa fa-pencil-square-o"></i></a>
                       
                       <a class="btn btn-danger" href="javascript:void(0)" title="Delete" onclick="delete_item('."'".$items->item_id."'".', '."'".$items->name."'".')"><i class="fa fa-trash"></i></a>';
+
+            $row[] = $items->encoded;
  
             $data[] = $row;
         }

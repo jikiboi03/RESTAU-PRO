@@ -34,6 +34,59 @@ $(document).ready(function()
                       "targets": 4,
                       "className": "text-right",
                 },
+                {
+                      "targets": 5,
+                      "className": "text-right",
+                },
+                {
+                      "targets": 6,
+                      "className": "text-right",
+                },
+                {
+                      "targets": 7,
+                      "className": "text-center",
+                },
+                {
+                      "targets": 8,
+                      "className": "text-right",
+                },
+                ],
+                "scrollX": true
+            });
+    }
+    else if(tableID == "units-table")
+    {
+    //datatables
+            table = $('#units-table').DataTable({ 
+         
+                "processing": true, //Feature control the processing indicator.
+                "serverSide": true, //Feature control DataTables' server-side processing mode.
+                "order": [], //Initial no order.
+         
+                // Load data for the table's content from an Ajax source
+                "ajax": {
+                    "url": "showlist-units",
+                    "type": "POST",
+                },
+         
+                //Set column definition initialisation properties.
+                "columnDefs": [
+                { 
+                    "targets": [ -1 ], //last column
+                    "orderable": false, //set not orderable
+                },
+                {
+                      "targets": 3,
+                      "className": "text-right",
+                },
+                {
+                      "targets": 4,
+                      "className": "text-right",
+                },
+                {
+                      "targets": 5,
+                      "className": "text-center",
+                },
                 ],
                 "scrollX": true
             });
@@ -60,12 +113,12 @@ $(document).ready(function()
                     "orderable": false, //set not orderable
                 },
                 {
-                      "targets": 3,
-                      "className": "text-center",
+                      "targets": 6,
+                      "className": "text-right",
                 },
                 {
-                      "targets": 4,
-                      "className": "text-right",
+                      "targets": 7,
+                      "className": "text-center",
                 },
                 ],
                 "scrollX": true
@@ -1926,6 +1979,18 @@ function add_item() // ---> calling for the Add Modal form
     $('.modal-title').text(text); // Set Title to Bootstrap modal title
 }
 
+function add_unit() // ---> calling for the Add Modal form
+{
+    save_method = 'add-unit';
+    text = 'Add Unit';
+    
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+    $('#modal_form').modal('show'); // show bootstrap modal
+    $('.modal-title').text(text); // Set Title to Bootstrap modal title
+}
+
 function add_supplier() // ---> calling for the Add Modal form
 {
     save_method = 'add-supplier';
@@ -2198,6 +2263,38 @@ function edit_item(id)
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Item'); // Set title to Bootstrap modal title
+ 
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+}
+
+function edit_item(id)
+{
+    save_method = 'update-unit';
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+ 
+    //Ajax Load data from ajax
+    $.ajax({
+        url : "edit-unit/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+            $('[name="unit_id"]').val(data.unit_id);
+            $('[name="name"]').val(data.name);
+            $('[name="descr"]').val(data.descr);
+            $('[name="pcs"]').val(data.pcs);
+            
+            $('[name="current_name"]').val(data.name);
+
+            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Edit Unit'); // Set title to Bootstrap modal title
  
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -2841,6 +2938,14 @@ function save()
     {
         url = "update-item";
     }
+    else if(save_method == 'add-unit') 
+    {
+        url = "add-unit";
+    }
+    else if(save_method == 'update-unit') 
+    {
+        url = "update-unit";
+    }
     else if(save_method == 'add-supplier') 
     {
         url = "add-supplier";
@@ -3053,6 +3158,23 @@ function save()
                     log_type = 'Update';
 
                     details = 'Item updated I' + $('[name="item_id"]').val() 
+                    + ': ' + $('[name="current_name"]').val() + ' to ' + $('[name="name"]').val();
+
+                    set_system_log(log_type, details);
+                }
+                else if(save_method == 'add-unit') 
+                {
+                    log_type = 'Add';
+
+                    details = 'New unit added: ' + $('[name="name"]').val();
+
+                    set_system_log(log_type, details);
+                }
+                else if(save_method == 'update-unit') 
+                {
+                    log_type = 'Update';
+
+                    details = 'Unit updated UN' + $('[name="unit_id"]').val() 
                     + ': ' + $('[name="current_name"]').val() + ' to ' + $('[name="name"]').val();
 
                     set_system_log(log_type, details);
@@ -3526,6 +3648,35 @@ function delete_item(id, name)
                 var log_type = 'Delete';
 
                 var details = 'Item deleted I' + id; 
+
+                set_system_log(log_type, details);
+
+                //if success reload ajax table
+                $('#modal_form').modal('hide');
+                reload_table();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error deleting data');
+            }
+        });
+ 
+    }
+}
+function delete_unit(id, name)
+{
+    if(confirm('Are you sure to delete this data?'))
+    {
+        // ajax delete data to database
+        $.ajax({
+            url : "delete-unit/"+id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data)
+            {
+                var log_type = 'Delete';
+
+                var details = 'Unit deleted UN' + id; 
 
                 set_system_log(log_type, details);
 

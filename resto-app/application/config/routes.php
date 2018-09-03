@@ -49,6 +49,26 @@ $route['delete-item/(:num)'] = 'Items/Items_controller/ajax_delete/$1';
 $route['showlist-items-api'] = 'Items/Items_controller/ajax_api_list';
 
 
+//************************************ UNITS ROUTES ****************************************************************
+//******************************************************************************************************************
+
+$route['units-page'] = 'Units/Units_controller';
+
+$route['showlist-units'] = 'Units/Units_controller/ajax_list';
+
+$route['add-unit'] = 'Units/Units_controller/ajax_add';
+
+$route['edit-unit/(:num)'] = 'Units/Units_controller/ajax_edit/$1';
+
+$route['update-unit'] = 'Units/Units_controller/ajax_update';
+
+$route['delete-unit/(:num)'] = 'Units/Units_controller/ajax_delete/$1';
+
+//======================================== API SECTION =================================================================
+
+$route['showlist-units-api'] = 'Units/Units_controller/ajax_api_list';
+
+
 //************************************ SUPPLIERS ROUTES ****************************************************************
 //******************************************************************************************************************
 

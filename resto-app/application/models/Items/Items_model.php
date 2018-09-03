@@ -5,7 +5,7 @@ class Items_model extends CI_Model {
  
     var $table = 'items';
 
-    var $column_order = array('item_id','name','descr','type','encoded',null); //set column field database for datatable orderable
+    var $column_order = array('item_id','name','descr','type','stock','stock_in','stock_out', 'encoded',null); //set column field database for datatable orderable
     var $column_search = array('item_id','name','descr','type','encoded'); //set column field database for datatable searchable
 
     var $order = array('item_id' => 'desc'); // default order 
@@ -18,7 +18,7 @@ class Items_model extends CI_Model {
  
     private function _get_datatables_query()
     {
-         
+        $this->db->select('*, (stock_in - stock_out) AS stock');
         $this->db->from($this->table);
  
         $i = 0;
@@ -69,6 +69,7 @@ class Items_model extends CI_Model {
 
     function get_api_datatables() // api function in getting data list
     {        
+        $this->db->select('*, (stock_in - stock_out) AS stock');
         $this->db->from($this->table);
 
         // get only records that are not currently removed
@@ -92,6 +93,7 @@ class Items_model extends CI_Model {
     // get both id and names
     function get_items()
     {
+        $this->db->select('*, (stock_in - stock_out) AS stock');
         $this->db->from($this->table);
 
         $this->db->where('removed', '0');
