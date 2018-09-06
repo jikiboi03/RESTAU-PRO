@@ -124,6 +124,47 @@ $(document).ready(function()
                 "scrollX": true
             });
     }
+    else if(tableID == "purhcase-order-table")
+    {
+    //datatables
+            table = $('#purhcase-order-table').DataTable({ 
+         
+                "processing": true, //Feature control the processing indicator.
+                "serverSide": true, //Feature control DataTables' server-side processing mode.
+                "order": [], //Initial no order.
+         
+                // Load data for the table's content from an Ajax source
+                "ajax": {
+                    "url": "showlist-po",
+                    "type": "POST",
+                },
+         
+                //Set column definition initialisation properties.
+                "columnDefs": [
+                { 
+                    "targets": [ -1 ], //last column
+                    "orderable": false, //set not orderable
+                },
+                {
+                      "targets": 3,
+                      "className": "text-right",
+                },
+                {
+                      "targets": 4,
+                      "className": "text-center",
+                },
+                {
+                      "targets": 5,
+                      "className": "text-right",
+                },
+                {
+                      "targets": 6,
+                      "className": "text-center",
+                },
+                ],
+                "scrollX": true
+            });
+    }
     else if(tableID == "sold-today-table")
     {
     //datatables
@@ -2003,6 +2044,18 @@ function add_supplier() // ---> calling for the Add Modal form
     $('.modal-title').text(text); // Set Title to Bootstrap modal title
 }
 
+function add_po() // ---> calling for the Add Modal form
+{
+    save_method = 'add-po';
+    text = 'Add Purchase Order';
+    
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+    $('#modal_form').modal('show'); // show bootstrap modal
+    $('.modal-title').text(text); // Set Title to Bootstrap modal title
+}
+
 function add_product() // ---> calling for the Add Modal form
 {
     save_method = 'add-product';
@@ -2318,9 +2371,38 @@ function edit_supplier(id)
         dataType: "JSON",
         success: function(data)
         {
+            $('[name="po_id"]').val(data.po_id);
             $('[name="supplier_id"]').val(data.supplier_id);
-            $('[name="name"]').val(data.name);
-            $('[name="address"]').val(data.address);
+            $('[name="date"]').val(data.date);
+            $('[name="status"]').val(data.status);
+
+            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Edit Purchase Order'); // Set title to Bootstrap modal title
+ 
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+}
+
+function edit_po(id)
+{
+    save_method = 'update-po';
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+ 
+    //Ajax Load data from ajax
+    $.ajax({
+        url : "edit-po/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+            $('[name="po_id"]').val(data.po_id);
+            $('[name="supplier_id"]').val(data.supplier_id);
             $('[name="city"]').val(data.city);
             $('[name="contact"]').val(data.contact);
             $('[name="email"]').val(data.email);

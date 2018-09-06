@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 03, 2018 at 05:54 PM
+-- Generation Time: Sep 06, 2018 at 06:07 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -188,7 +188,10 @@ INSERT INTO `logs` (`log_id`, `user_fullname`, `log_type`, `details`, `date_time
 (74, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-03 09:21:19'),
 (75, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-03 11:39:48'),
 (76, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-03 16:50:42'),
-(77, 'admin', 'Add', 'New%20unit%20added:%20Dozen12pcs', '2018-09-03 17:03:30');
+(77, 'admin', 'Add', 'New%20unit%20added:%20Dozen12pcs', '2018-09-03 17:03:30'),
+(78, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-04 09:43:36'),
+(79, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-05 09:15:14'),
+(80, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-06 14:49:31');
 
 -- --------------------------------------------------------
 
@@ -298,6 +301,20 @@ CREATE TABLE `pos` (
 
 INSERT INTO `pos` (`pos_id`, `pos_name`, `hardware_id`, `software_id`, `receipt_count`, `activated`, `encoded`) VALUES
 (1, 'WOA_1', '95483d5d09788ff1', 'apk00001', 0, 1, '2018-08-29 14:08:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `po_details`
+--
+
+CREATE TABLE `po_details` (
+  `po_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `unit_qty` int(11) NOT NULL,
+  `pcs_qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -762,6 +779,12 @@ ALTER TABLE `pos`
   ADD PRIMARY KEY (`pos_id`);
 
 --
+-- Indexes for table `po_details`
+--
+ALTER TABLE `po_details`
+  ADD PRIMARY KEY (`po_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -856,7 +879,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `packages`
 --
@@ -877,6 +900,11 @@ ALTER TABLE `po`
 --
 ALTER TABLE `pos`
   MODIFY `pos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `po_details`
+--
+ALTER TABLE `po_details`
+  MODIFY `po_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `products`
 --
