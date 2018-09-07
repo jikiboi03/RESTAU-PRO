@@ -18,7 +18,7 @@ class PO_controller extends CI_Controller {
 
         $this->load->helper('url');							
 
-        $data['title'] = '<i class="fa fa-archive"></i> Items';					
+        $data['title'] = '<i class="fa fa-cart-plus"></i> Purchase Oders';					
         $this->load->view('template/dashboard_header',$data);
         $this->load->view('po/po_view',$data);
         $this->load->view('template/dashboard_navigation');

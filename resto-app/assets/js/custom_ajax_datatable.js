@@ -2325,7 +2325,7 @@ function edit_item(id)
     });
 }
 
-function edit_item(id)
+function edit_unit(id)
 {
     save_method = 'update-unit';
     $('#form')[0].reset(); // reset form on modals
@@ -2371,13 +2371,15 @@ function edit_supplier(id)
         dataType: "JSON",
         success: function(data)
         {
-            $('[name="po_id"]').val(data.po_id);
             $('[name="supplier_id"]').val(data.supplier_id);
-            $('[name="date"]').val(data.date);
-            $('[name="status"]').val(data.status);
+            $('[name="name"]').val(data.name);
+            $('[name="address"]').val(data.address);
+            $('[name="city"]').val(data.city);
+            $('[name="contact"]').val(data.contact);
+            $('[name="email"]').val(data.email);
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Purchase Order'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Supplier'); // Set title to Bootstrap modal title
  
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -2403,14 +2405,12 @@ function edit_po(id)
         {
             $('[name="po_id"]').val(data.po_id);
             $('[name="supplier_id"]').val(data.supplier_id);
-            $('[name="city"]').val(data.city);
-            $('[name="contact"]').val(data.contact);
-            $('[name="email"]').val(data.email);
-            
-            $('[name="current_name"]').val(data.name);
+            $('[name="user_id"]').val(data.user_id);
+            $('[name="date"]').val(data.date);
+            $('[name="status"]').val(data.status);
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Supplier'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Purchase Order'); // Set title to Bootstrap modal title
  
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -3036,6 +3036,14 @@ function save()
     {
         url = "update-supplier";
     }
+    else if(save_method == 'add-po') 
+    {
+        url = "add-po";
+    }
+    else if(save_method == 'update-po') 
+    {
+        url = "update-po";
+    }
     else if(save_method == 'add-product') 
     {
         url = "add-product";
@@ -3275,6 +3283,22 @@ function save()
 
                     details = 'Supplier updated SU' + $('[name="supplier_id"]').val() 
                     + ': ' + $('[name="current_name"]').val() + ' to ' + $('[name="name"]').val();
+
+                    set_system_log(log_type, details);
+                }
+                else if(save_method == 'add-po') 
+                {
+                    log_type = 'Add';
+
+                    details = 'New purchase order added: PO' + $('[name="po_id"]').val();
+
+                    set_system_log(log_type, details);
+                }
+                else if(save_method == 'update-po') 
+                {
+                    log_type = 'Update';
+
+                    details = 'Purchase order updated PO' + $('[name="po_id"]').val();
 
                     set_system_log(log_type, details);
                 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 06, 2018 at 06:07 PM
+-- Generation Time: Sep 07, 2018 at 06:02 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -191,7 +191,8 @@ INSERT INTO `logs` (`log_id`, `user_fullname`, `log_type`, `details`, `date_time
 (77, 'admin', 'Add', 'New%20unit%20added:%20Dozen12pcs', '2018-09-03 17:03:30'),
 (78, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-04 09:43:36'),
 (79, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-05 09:15:14'),
-(80, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-06 14:49:31');
+(80, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-06 14:49:31'),
+(81, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-07 11:04:25');
 
 -- --------------------------------------------------------
 
@@ -309,6 +310,20 @@ INSERT INTO `pos` (`pos_id`, `pos_name`, `hardware_id`, `software_id`, `receipt_
 --
 
 CREATE TABLE `po_details` (
+  `po_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `unit_qty` int(11) NOT NULL,
+  `pcs_qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `po_temp`
+--
+
+CREATE TABLE `po_temp` (
   `po_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
@@ -779,12 +794,6 @@ ALTER TABLE `pos`
   ADD PRIMARY KEY (`pos_id`);
 
 --
--- Indexes for table `po_details`
---
-ALTER TABLE `po_details`
-  ADD PRIMARY KEY (`po_id`);
-
---
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -879,7 +888,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 --
 -- AUTO_INCREMENT for table `packages`
 --
@@ -900,11 +909,6 @@ ALTER TABLE `po`
 --
 ALTER TABLE `pos`
   MODIFY `pos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `po_details`
---
-ALTER TABLE `po_details`
-  MODIFY `po_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `products`
 --
