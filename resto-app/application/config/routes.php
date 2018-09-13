@@ -109,6 +109,26 @@ $route['delete-po/(:num)'] = 'PO/PO_controller/ajax_delete/$1';
 $route['showlist-po-api'] = 'PO/PO_controller/ajax_api_list';
 
 
+//************************************ PURCHASE ORDERS TEMP ROUTES ****************************************************************
+//******************************************************************************************************************
+
+$route['po-temp-page'] = 'PO_temp/PO_temp_controller';
+
+$route['showlist-po-temp'] = 'PO_temp/PO_temp_controller/ajax_list';
+
+$route['add-po-temp'] = 'PO_temp/PO_temp_controller/ajax_add';
+
+$route['edit-po-temp/(:num)'] = 'PO_temp/PO_temp_controller/ajax_edit/$1';
+
+$route['update-po-temp'] = 'PO_temp/PO_temp_controller/ajax_update';
+
+$route['delete-po-temp/(:num)'] = 'PO_temp/PO_temp_controller/ajax_delete/$1';
+
+//======================================== API SECTION =================================================================
+
+$route['showlist-po-api'] = 'PO_temp/PO_temp_controller/ajax_api_list';
+
+
 //************************************ PRODUCTS ROUTES ****************************************************************
 //******************************************************************************************************************
 
