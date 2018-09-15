@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 07, 2018 at 06:02 PM
+-- Generation Time: Sep 13, 2018 at 06:03 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -192,7 +192,12 @@ INSERT INTO `logs` (`log_id`, `user_fullname`, `log_type`, `details`, `date_time
 (78, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-04 09:43:36'),
 (79, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-05 09:15:14'),
 (80, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-06 14:49:31'),
-(81, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-07 11:04:25');
+(81, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-07 11:04:25'),
+(82, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-10 11:25:56'),
+(83, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-10 13:36:33'),
+(84, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-10 16:55:41'),
+(85, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-12 17:22:26'),
+(86, 'Adminlast, Adminfirst', 'Login', 'System user login as Administrator', '2018-09-13 09:29:36');
 
 -- --------------------------------------------------------
 
@@ -311,6 +316,7 @@ INSERT INTO `pos` (`pos_id`, `pos_name`, `hardware_id`, `software_id`, `receipt_
 
 CREATE TABLE `po_details` (
   `po_id` int(11) NOT NULL,
+  `num` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
   `unit_qty` int(11) NOT NULL,
@@ -324,7 +330,7 @@ CREATE TABLE `po_details` (
 --
 
 CREATE TABLE `po_temp` (
-  `po_id` int(11) NOT NULL,
+  `num` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
   `unit_qty` int(11) NOT NULL,
@@ -560,7 +566,8 @@ INSERT INTO `transactions` (`trans_id`, `datetime`, `discount`, `disc_type`, `st
 (4, '2018-08-23 15:56:53', '0.00', 0, 'CLEARED', 'TAKE-OUT', '200.00', '110.00', 'Cash', 'n/a', 'n/a', 'n/a', 113, 114, 0, 0, 10000004),
 (5, '2018-08-23 16:02:23', '10.00', 2, 'CLEARED', 'DINE-IN', '75.00', '0.00', 'Cash Card', '5454', 'n/a', '15151', 113, 112, 0, 1, 10000005),
 (6, '2018-08-23 16:26:52', '0.00', 0, 'CLEARED', 'DINE-IN', '390.00', '0.00', 'Credit Card', '54545454', 'Apolinario Mabini', 'n/a', 113, 112, 0, 0, 10000006),
-(7, '2018-08-23 17:01:57', '0.00', 0, 'CANCELLED', 'DINE-IN', '0.00', '0.00', 'n/a', 'n/a', 'n/a', 'n/a', 113, 112, 0, 0, 10000000);
+(7, '2018-08-23 17:01:57', '0.00', 0, 'CANCELLED', 'DINE-IN', '0.00', '0.00', 'n/a', 'n/a', 'n/a', 'n/a', 113, 112, 0, 0, 10000000),
+(8, '2018-09-10 15:51:45', '0.00', 0, 'ONGOING', 'TAKE-OUT', '0.00', '0.00', 'n/a', 'n/a', 'n/a', 'n/a', 113, 0, 1, 0, 10000000);
 
 -- --------------------------------------------------------
 
@@ -601,7 +608,11 @@ INSERT INTO `trans_details` (`trans_id`, `prod_id`, `pack_id`, `prod_type`, `pri
 (6, 0, 1, 1, '390.00', 1, '390.00', 0),
 (6, 2, 0, 2, '0.00', 3, '0.00', 1),
 (6, 1, 0, 2, '0.00', 3, '0.00', 1),
-(7, 2, 0, 0, '45.00', 1, '45.00', 0);
+(7, 2, 0, 0, '45.00', 1, '45.00', 0),
+(8, 1, 0, 0, '40.00', 1, '40.00', 0),
+(8, 0, 1, 1, '390.00', 5, '1950.00', 0),
+(8, 2, 0, 2, '0.00', 15, '0.00', 1),
+(8, 1, 0, 2, '0.00', 15, '0.00', 1);
 
 -- --------------------------------------------------------
 
@@ -650,7 +661,10 @@ INSERT INTO `trans_logs` (`log_id`, `user_fullname`, `log_type`, `details`, `dat
 (26, 'xanderford', 'SetOrder', 'New transaction added S6 by U113', '2018-08-23 16:26:52'),
 (27, 'admin', 'Payment', 'Transaction payment S6 RCPT#: 10000006', '2018-08-23 16:29:23'),
 (28, 'xanderford', 'SetOrder', 'New transaction added S7 by U113', '2018-08-23 17:01:57'),
-(29, 'admin', 'Cancel', 'Transaction cancelled S7 by U112', '2018-08-23 17:03:46');
+(29, 'admin', 'Cancel', 'Transaction cancelled S7 by U112', '2018-08-23 17:03:46'),
+(30, 'xanderford', 'SetOrder', 'New transaction added S8 by U113', '2018-09-10 15:51:45'),
+(31, 'xanderford', 'UpdateOrder', 'Transaction updated S8 by U113', '2018-09-10 15:52:03'),
+(32, 'xanderford', 'Void', 'Item void S8 by U113 - Package: G1', '2018-09-10 15:52:22');
 
 -- --------------------------------------------------------
 
@@ -794,6 +808,12 @@ ALTER TABLE `pos`
   ADD PRIMARY KEY (`pos_id`);
 
 --
+-- Indexes for table `po_temp`
+--
+ALTER TABLE `po_temp`
+  ADD PRIMARY KEY (`num`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -888,7 +908,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT for table `packages`
 --
@@ -909,6 +929,11 @@ ALTER TABLE `po`
 --
 ALTER TABLE `pos`
   MODIFY `pos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `po_temp`
+--
+ALTER TABLE `po_temp`
+  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -948,12 +973,12 @@ ALTER TABLE `table_groups`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `trans_logs`
 --
 ALTER TABLE `trans_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `units`
 --
