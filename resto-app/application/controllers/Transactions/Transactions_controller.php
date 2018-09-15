@@ -600,7 +600,9 @@ class Transactions_controller extends CI_Controller {
 
             $gross_total = $this->trans_details->get_trans_gross($trans_id);
 
-            //$this->print_receipt_cook($line_items, $order_type, $trans_id, $staff_username, $table_str, $gross_total);
+            $this->print_receipt_cook($line_items, $order_type, $trans_id, $staff_username, $table_str, $gross_total);
+
+            $this->print_receipt_cook($line_items, $order_type, $trans_id, $staff_username, $table_str, $gross_total);
 
 
             // add transaction to trans_logs record --------------------------------------------------------
@@ -797,7 +799,7 @@ class Transactions_controller extends CI_Controller {
             $table_str = 'n/a';
         }
 
-        //$this->print_refund_receipt($line_items, $trans_id, $staff_username, $cashier_username, $cash_amt, $receipt_no);
+        $this->print_refund_receipt($line_items, $trans_id, $staff_username, $cashier_username, $cash_amt, $receipt_no);
 
         // add transaction to trans_logs record --------------------------------------------------------
 
@@ -810,7 +812,6 @@ class Transactions_controller extends CI_Controller {
         echo json_encode(array("status" => TRUE));
     }
 
-    // public function print_receipt_cook($line_items, $tables, $gross_total, $discount
     public function print_receipt_cook($line_items, $order_type, $trans_id, $staff_username, $table_str, $gross_total)
     {
         /* Open the printer; this will change depending on how it is connected */
@@ -854,7 +855,7 @@ class Transactions_controller extends CI_Controller {
         $printer -> text(new item('Transaction#: ' . $trans_id, ''));
         $printer -> text(new item('Staff: ' . $staff_username, ''));
 
-        $printer -> text(str_pad("", 35, '=', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '=', STR_PAD_BOTH) . "\n");
 
         /* Items */
         $printer -> setEmphasis(true);
@@ -864,14 +865,14 @@ class Transactions_controller extends CI_Controller {
             $printer -> text($item);
         }
 
-        $printer -> text(str_pad("", 35, '=', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '=', STR_PAD_BOTH) . "\n");
         
         /* Footer */
         $printer -> feed();
         $printer -> setJustification(Printer::JUSTIFY_CENTER);
         $printer -> text($date . "\n");
 
-        $printer -> text(str_pad("", 35, '_', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '_', STR_PAD_BOTH) . "\n");
         
         /* Cut the receipt and open the cash drawer */
         $printer -> cut();
@@ -937,7 +938,7 @@ class Transactions_controller extends CI_Controller {
         $printer -> text(new item('Staff: ' . $staff_username, ''));
         $printer -> text(new item('Cashier: ' . $cashier_username, ''));
 
-        $printer -> text(str_pad("", 35, '=', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '=', STR_PAD_BOTH) . "\n");
 
         /* Items */
         $printer -> setEmphasis(true);
@@ -947,7 +948,7 @@ class Transactions_controller extends CI_Controller {
             $printer -> text($item);
         }
 
-        $printer -> text(str_pad("", 35, '=', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '=', STR_PAD_BOTH) . "\n");
 
         $printer -> setEmphasis(true);
         
@@ -969,7 +970,7 @@ class Transactions_controller extends CI_Controller {
         $printer -> feed();
         $printer -> text("Innotech Solutions\n");
         $printer -> text("Thank You Come Again\n");
-        $printer -> text(str_pad("", 35, '_', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '_', STR_PAD_BOTH) . "\n");
         
         /* Cut the receipt and open the cash drawer */
         $printer -> cut();
@@ -1142,18 +1143,31 @@ class Transactions_controller extends CI_Controller {
 
             // get each table for table_groups -------------------------------------------------------------
 
+            $line_tables = array();
+
             foreach ($transaction['tables'] as $tables)
             {
                 // insert new table to table_groups -------------------------------------------------------
                 $tbl_id = $tables['tbl_id'];
+
+                if ($tbl_id != 0)
+                {
+                    $tbl_name = $this->tables->get_table_name($tbl_id);    
+                }
+                else
+                {
+                    $tbl_name = 'No Table';
+                }
+                
 
                 $data_tables = array(
                     'trans_id' => $trans_id,
                     'tbl_id' => $tbl_id,
                 );
                 $this->table_groups->save($data_tables);
-            }
 
+                $line_tables[] = $tbl_name;
+            }
         }
 
         if (sizeof($line_tables) != 0)
@@ -1168,7 +1182,7 @@ class Transactions_controller extends CI_Controller {
 
         $gross_total = $this->trans_details->get_trans_gross($trans_id);
 
-        //$this->print_receipt_cook($line_items, $order_type, $trans_id, $staff_username, $table_str, $gross_total);
+        $this->print_receipt_cook($line_items, $order_type, $trans_id, $staff_username, $table_str, $gross_total);
 
         // add transaction to trans_logs record --------------------------------------------------------
 
@@ -1210,8 +1224,8 @@ class Transactions_controller extends CI_Controller {
 
      public function __toString()
      {
-         $rightCols = 10;
-         $leftCols = 25;
+         $rightCols = 9;
+         $leftCols = 24;
          if ($this -> dollarSign) {
              $leftCols = $leftCols / 2 - $rightCols / 2;
          }

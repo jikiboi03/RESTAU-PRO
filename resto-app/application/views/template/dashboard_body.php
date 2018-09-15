@@ -8,11 +8,11 @@
                     <div class="col-md-2">
                         <img src=<?php echo "'assets/img/" . $store->img . "'"; ?> style="width: 100%; margin-top: 0%; margin-right: 3%;">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <h1 class="page-header text-overflow"><br><br><b><?php echo $store->name; ?></b><br><span style="font-size: 16px;">R e s t o A p p | Restaurant Point of Sales App by InnoTech Solutions</span></h1>
                     </div>
 
-                    <div class="col-md-2"><br><br><br><br>
+                    <div class="col-md-3"><br><br><br><br>
                         <h1 class="page-header text-overflow" align="center">[ <?php echo $title; ?> ]</h1>
                     </div>
 
@@ -76,11 +76,11 @@
                                 <div class="col-sm-6 col-md-2">
                                     <div class="panel panel-danger panel-colorful">
                                         <div class="panel-body text-center">
-                                            <p class="text-uppercase mar-btm text-md">Transactions Today</p>
+                                            <p class="text-uppercase mar-btm text-md">Transactions</p>
                                             <i class="fa fa-qrcode fa-5x"></i>
                                             <hr>
                                             <p class="h1 text-thin"><?php echo $total_trans_count_today; ?> </p>
-                                            <small><span class="text-semibold" style="font-size: 12px;">Dine in: [ <?php echo $dine_in_today; ?> ] | Take out: [ <?php echo $take_out_today; ?> ]</small>
+                                            <small><span class="text-semibold" style="font-size: 12px;">Dine in: [ <?php echo $dine_in_today; ?> ]<br>  Take out: [ <?php echo $take_out_today; ?> ]</small>
                                         </div>
                                     </div>
                                 </div>
@@ -92,11 +92,11 @@
                                 <div class="col-sm-6 col-md-2">
                                     <div class="panel panel-warning panel-colorful">
                                         <div class="panel-body text-center">
-                                            <p class="text-uppercase mar-btm text-md">Menu Items Sold Today</p>
+                                            <p class="text-uppercase mar-btm text-md">Menu Items Sold</p>
                                             <i class="fa fa-cutlery fa-5x"></i>
                                             <hr>
                                             <p class="h1 text-thin"><?php echo $total_menu_items_sold_today; ?> </p>
-                                            <small><span class="text-bold" style="font-size: 12px;">Products: [ <?php echo $individual_products_sold_today; ?> ] | Packages: [ <?php echo $packages_sold_today; ?> ]</small>
+                                            <small><span class="text-bold" style="font-size: 12px;">Products: [ <?php echo $individual_products_sold_today; ?> ]  Packages: [ <?php echo $packages_sold_today; ?> ]</small>
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                 <div class="col-sm-6 col-md-2">
                                     <div class="panel panel-mint panel-colorful">
                                         <div class="panel-body text-center">
-                                            <p class="text-uppercase mar-btm text-md">Cancelled Trans Today</p>
+                                            <p class="text-uppercase mar-btm text-md">Cancelled Trans</p>
                                             <i class="fa fa-window-close-o fa-5x"></i>
                                             <hr>
                                             <p class="h1 text-thin"><?php echo $cancelled_trans_today; ?></p>

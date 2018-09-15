@@ -94,7 +94,7 @@ class Dashboard_controller extends CI_Controller {
                 }
             }
 
-            $percent_net_sales_str = '[ ' . number_format($percent_net_sales, 1) . ' % ] Higher than yesterday\'s ' . '[ ₱ ' . number_format($yesterday_net_sales, 2) . ' ]';
+            $percent_net_sales_str = '[ ' . number_format($percent_net_sales, 1) . ' % ] Higher than<br> yesterday\'s ' . '[ ₱ ' . number_format($yesterday_net_sales, 2) . ' ]';
         }
         
         $today_net_sales_str = '₱ ' . number_format($today_net_sales, 2);
@@ -139,7 +139,7 @@ class Dashboard_controller extends CI_Controller {
         
 
         $discounts_rendered_today_str = '₱ ' . number_format($discounts_rendered_today, 2);
-        $discounts_gross_percentage_str = '[ ' . number_format($discounts_gross_percentage, 1) . ' % ]  of Total Gross Sales [ ₱ ' . number_format($gross_total_today, 2) . ' ]';
+        $discounts_gross_percentage_str = '[ ' . number_format($discounts_gross_percentage, 1) . ' % ]  of Total Gross<br> Sales [ ₱ ' . number_format($gross_total_today, 2) . ' ]';
 
         // -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -150,7 +150,7 @@ class Dashboard_controller extends CI_Controller {
         $voided_menu_items_today = $this->trans_logs->get_total_void_today($today);
         
 
-        $voided_menu_items_today_str = 'Voided Menu Items [ ' . $voided_menu_items_today . ' ]';
+        $voided_menu_items_today_str = 'Voided Menu<br> Items [ ' . $voided_menu_items_today . ' ]';
 
 
 
@@ -461,12 +461,12 @@ class Dashboard_controller extends CI_Controller {
 
         /* Information for the receipt */
         $branch_id = $store->branch_id;
-        $store_name = wordwrap($store->name . ' B#: ' . $branch_id, 35, "\n");
-        $address = wordwrap($store->address, 35, "\n");
-        $city = wordwrap($store->city, 35, "\n");
-        $tin = wordwrap($store->tin, 35, "\n");
-        $telephone = wordwrap('Tel#: ' . $store->telephone, 35, "\n");
-        $mobile = wordwrap('Cel#: ' . $store->mobile, 35, "\n");
+        $store_name = wordwrap($store->name . ' #: ' . $branch_id, 33, "\n");
+        $address = wordwrap($store->address, 33, "\n");
+        $city = wordwrap($store->city, 33, "\n");
+        $tin = wordwrap($store->tin, 33, "\n");
+        $telephone = wordwrap('Tel#: ' . $store->telephone, 33, "\n");
+        $mobile = wordwrap('Cel#: ' . $store->mobile, 33, "\n");
         $date = date('D, j F Y h:i A'); // format: Wed, 4 July 2018 11:20 AM
         $today = date('Y-m-d');
 
@@ -496,19 +496,19 @@ class Dashboard_controller extends CI_Controller {
         $printer -> text(new item('Cashier: ' . $cashier_username, ''));
         $printer -> text(new item('Date: ' . $today, ''));
 
-        $printer -> text(str_pad("COUNT", 35, '=', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("COUNT", 33, '=', STR_PAD_BOTH) . "\n");
 
         $printer -> text(new item('TotalTrans: ', $trans_count_total));
         $printer -> text(new item('DineIn: ', $trans_count_dine_in));
         $printer -> text(new item('TakeOut: ', $trans_count_take_out));
-        $printer -> text(str_pad("", 35, '-', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '-', STR_PAD_BOTH) . "\n");
         $printer -> text(new item('Cleared: ', $trans_count_cleared));
         $printer -> text(new item('Cancelled: ', $trans_count_cancelled));
         $printer -> text(new item('Refunded: ', $trans_count_refunded));
-        $printer -> text(str_pad("", 35, '-', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '-', STR_PAD_BOTH) . "\n");
         $printer -> text(new item('VoidItems: ', $void_items_count));
 
-        $printer -> text(str_pad("VALUE", 35, '=', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("VALUE", 33, '=', STR_PAD_BOTH) . "\n");
         
         /* Items */
         $printer -> setEmphasis(true);
@@ -516,28 +516,28 @@ class Dashboard_controller extends CI_Controller {
         $printer -> setEmphasis(false);
 
         $printer -> text(new item('GrossSales: ', $gross_sales_str));
-        $printer -> text(str_pad("", 35, '-', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '-', STR_PAD_BOTH) . "\n");
         $printer -> text(new item('DiscountSC: ', $disc_sc_str));
         $printer -> text(new item('DiscountPWD: ', $disc_pwd_str));
         $printer -> text(new item('DiscountPromo: ', $disc_promo_str));
         $printer -> text(new item('DiscountTotal: ', $disc_total_str));
-        $printer -> text(str_pad("", 35, '-', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '-', STR_PAD_BOTH) . "\n");
         $printer -> text(new item('Cancelled: ', $cancelled_sales_str));
         $printer -> text(new item('Refunded: ', $refunded_sales_str));
 
-        $printer -> text(str_pad("", 35, '-', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '-', STR_PAD_BOTH) . "\n");
 
         $printer -> setEmphasis(true);
         $printer -> text(new item('NetSales: ', $net_sales_str));
         $printer -> setEmphasis(false);
 
-        $printer -> text(str_pad("VAT", 35, '=', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("VAT", 33, '=', STR_PAD_BOTH) . "\n");
 
         $printer -> text(new item('VATSales: ', $vat_sales_str));
         $printer -> text(new item('VATAmount: ', $vat_amount_str));
         $printer -> text(new item('VATExcempt: ', $vat_exempt_str));
 
-        $printer -> text(str_pad("RECEIPT", 35, '=', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("RECEIPT", 33, '=', STR_PAD_BOTH) . "\n");
 
         $printer -> text(new item('StartRcpt: ', $start_rcpt_no));
         $printer -> text(new item('EndRecpt: ', $end_rcpt_no));
@@ -548,7 +548,7 @@ class Dashboard_controller extends CI_Controller {
         $printer -> text($date . "\n");
 
         $printer -> feed();
-        $printer -> text(str_pad("", 35, '_', STR_PAD_BOTH) . "\n");
+        $printer -> text(str_pad("", 33, '_', STR_PAD_BOTH) . "\n");
         
         /* Cut the receipt and open the cash drawer */
         $printer -> cut();
@@ -600,8 +600,8 @@ class item
 
     public function __toString()
     {
-        $rightCols = 10;
-        $leftCols = 25;
+        $rightCols = 9;
+        $leftCols = 24;
         if ($this -> dollarSign) {
             $leftCols = $leftCols / 2 - $rightCols / 2;
         }
