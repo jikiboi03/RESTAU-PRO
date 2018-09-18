@@ -314,11 +314,7 @@ $(document).ready(function()
                   var row_count = data[9], best_selling = data[6],
                       $node = this.api().row(row).nodes().to$();
 
-                  if (row_count == 0) 
-                  {
-                    $node.css('background-color', '#ccccff');
-                  }
-                  else if (best_selling.length > 20) // if there are words such as rank, star symbol, etc. (more than 14 chars automatically)
+                  if (best_selling.length > 20) // if there are words such as rank, star symbol, etc. (more than 14 chars automatically)
                   {
                     function isOdd(num) { return num % 2;}
                     
@@ -329,7 +325,11 @@ $(document).ready(function()
                     else
                     {
                       $node.css('background-color', '#ccffcc');
-                    } 
+                    }
+                  }
+                  else if (row_count == 0) 
+                  {
+                     $node.css('background-color', '#ccccff');
                   }
                 }
             });
@@ -2852,11 +2852,6 @@ function edit_pack_detail_qty(idone, idtwo)
     });
 }
 
-// function edit_cis_view(child_id)
-// {
-//     window.location.href='edit-cis-page/' + child_id;
-// }
-
 
 
 function reload_table()
@@ -3004,6 +2999,72 @@ function save()
     else if(save_method == 'update-pack-detail') 
     {
         url = "../update-pack-detail";
+    }
+
+
+
+
+
+
+    else if(save_method == 'add-atm') 
+    {
+        url = "atm/atm_controller/ajax_add";
+    }
+    else if(save_method == 'update-atm') 
+    {
+        url = "atm/atm_controller/ajax_update";
+    }
+    else if(save_method == 'add-loan') 
+    {
+        url = "../profiles/profiles_controller/ajax_add";
+    }
+    else if(save_method == 'update-loan') 
+    {
+        url = "../profiles/profiles_controller/ajax_update";
+    }
+    else if(save_method == 'update-loan-date-remarks') 
+    {
+        $form = '#form_edit_date_remarks';
+        url = "../profiles/profiles_controller/ajax_update_date_remarks";
+    }
+    else if(save_method == 'add-payment') 
+    {
+        $form = '#form_add_payment';
+        url = "../../../transactions/transactions_controller/ajax_paid";
+    }
+    else if(save_method == 'add-interest') 
+    {
+        $form = '#form_add_interest';
+        url = "../../../transactions/transactions_controller/ajax_add_interest";
+    }
+    else if(save_method == 'adjust-loan') 
+    {
+        $form = '#form_adjust_loan';
+        url = "../../../transactions/transactions_controller/ajax_adjustment";
+    }
+    else if(save_method == 'update-trans-date-remarks') 
+    {
+        $form = '#form_edit_date_remarks';
+        url = "../../../transactions/transactions_controller/ajax_update";
+    }
+    else if(save_method == 'adjust-capital') 
+    {
+        $form = '#form';
+        url = "capital/capital_controller/ajax_add";
+    }
+    else if(save_method == 'update-capital-date-remarks') 
+    {
+        $form = '#form_edit_date_remarks';
+        url = "capital/capital_controller/ajax_update";
+    }
+    
+    else if(save_method == 'add-schedule') 
+    {
+        url = "Schedules/Schedules_controller/ajax_add";
+    }
+    else if(save_method == 'update-schedule') 
+    {
+        url = "Schedules/Schedules_controller/ajax_update";
     }
 
     else if(save_method == 'add-user') 

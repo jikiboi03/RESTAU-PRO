@@ -916,6 +916,7 @@ class Transactions_model extends CI_Model {
         
         $this->db->where('datetime >=', $date_from);
         $this->db->where('datetime <=', $date_to);
+        $this->db->where('status =', 'CLEARED');
         
         $query = $this->db->get();
 
